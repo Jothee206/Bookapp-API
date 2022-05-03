@@ -22,6 +22,9 @@ import lombok.ToString;
 	@Column(name="id")
 	private Integer id;
 	
+	@Column(name="book_id")
+	private Integer book_id;
+	
 	@Column(name="category")
 	private String category;
 	

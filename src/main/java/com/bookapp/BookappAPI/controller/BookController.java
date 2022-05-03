@@ -21,7 +21,7 @@ public class BookController {
 	
 	@Autowired
 	BookRepository bookRepository;
-	
+	 
 	@PostMapping("Books/save")
 	public void save(@RequestBody Book book) {
 		bookRepository.save(book);
@@ -37,8 +37,8 @@ public class BookController {
 	}
 
 	@PutMapping("Books/{id}")
-	public void update(@PathVariable("id") Integer id, @RequestBody User user) {
-		Book book = new Book();
+	public void update(@PathVariable("id") Integer id, @RequestBody Book book) {
+
 		book.setId(id);
 		bookRepository.save(book);
 	}
@@ -52,6 +52,16 @@ public class BookController {
 	@GetMapping("Books/findBook/{id}")
 	public Book findById(@PathVariable("id") Integer id) {
 		Optional<Book> book =bookRepository.findById(id);
+		if (book.isPresent()) {
+			return book.get();
+		} else {
+			return null;
+		}
+
+	}
+	@GetMapping("Books/findBook/title")
+	public Book findByTitle(@PathVariable("title") String  title) {
+		Optional<Book> book =bookRepository.findByTitle("title");
 		if (book.isPresent()) {
 			return book.get();
 		} else {

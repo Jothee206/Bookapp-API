@@ -45,7 +45,7 @@ public class UserController {
 
 	@PutMapping("Users/{id}")
 	public void update(@PathVariable("id") Integer id, @RequestBody User user) {
-		user.setId(id);
+		user.setUser_id(id);
 		userRepository.save(user);
 	}
 
@@ -58,5 +58,15 @@ public class UserController {
 			return null;
 		}
 
+	}
+	@PostMapping("Users/login")
+	public User login(@RequestBody User user) {
+		Optional<User> userObj=userRepository.findByEmailAndPassword(user.getEmail(),user.getPassword());
+		if(userObj.isPresent()) {
+			return userObj.get();
+		}else {
+		return null;
+		}
+		
 	}
 }

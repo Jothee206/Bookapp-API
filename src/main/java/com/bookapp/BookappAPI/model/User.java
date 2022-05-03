@@ -16,8 +16,8 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //AutoIncrement
-	@Column(name="id")
-	private Integer id;
+	@Column(name="user_id")
+	private Integer user_id;
 	
 	@Column(name="name")
 	private String name;
