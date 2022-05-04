@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,38 +14,64 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bookapp.bookappapi.Service.BookService;
 import com.bookapp.bookappapi.dao.BookRepository;
 import com.bookapp.bookappapi.model.Book;
-import com.bookapp.bookappapi.model.User;
+
+
 
 @RestController
 public class BookController {
 	
+	
 	@Autowired
 	BookRepository bookRepository;
+	
+	@Autowired
+	BookService bookservice;
 	 
 	@PostMapping("Books/save")
-	public void save(@RequestBody Book book) {
-		bookRepository.save(book);
+	public  ResponseEntity <String> save(@RequestBody Book book) {
+		try {
+			
+		    bookservice.save(book);
+		return new ResponseEntity<String> ("success",HttpStatus.OK);
+		
+	}catch(Exception e) {
+		return new ResponseEntity<String> (e.getMessage(),HttpStatus.BAD_REQUEST);
 	}
-
+	}
 
 
 	@GetMapping("Books/list")
-	public List<Book> findAll() {
-		List<Book> BookList = bookRepository.findAll();
-		return BookList;
-
+	public List<Book> displaylist() {
+		List<Book> findAll=null;
+		try {
+			findAll=bookservice.findAll();
+		}catch(Exception e) {
+			e.getMessage();
+		}
+		return findAll;
+		
 	}
+
 
 	@PutMapping("Books/{id}")
-	public void update(@PathVariable("id") Integer id, @RequestBody Book book) {
-
-		book.setId(id);
-		bookRepository.save(book);
+	//public void update(@PathVariable("id") Integer id, @RequestBody Book book) { 
+   public ResponseEntity<String> update(@PathVariable("id") Integer id, @RequestBody Book book){
+		try {
+			bookservice.save(book);
+			return new ResponseEntity<String> ("success",HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity<String> (e.getMessage(),HttpStatus.BAD_REQUEST);
+			
+		}
+   
+   
+		
 	}
 
-	@DeleteMapping("Books/{id}")
+	/*@DeleteMapping("Books/{id}")
 	public void delete(@PathVariable("id") Integer id) {
 		bookRepository.deleteById(id);
 	}
@@ -58,17 +86,8 @@ public class BookController {
 			return null;
 		}
 
-	}
-	@GetMapping("Books/findBook/title")
-	public Book findByTitle(@PathVariable("title") String  title) {
-		Optional<Book> book =bookRepository.findByTitle("title");
-		if (book.isPresent()) {
-			return book.get();
-		} else {
-			return null;
-		}
-
-	}
+	}*/
+	
 	
 	
 	

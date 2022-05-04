@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,10 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bookapp.bookappapi.dao.UserRepository;
 import com.bookapp.bookappapi.model.User;
 
-
-
-
-
 @RestController // to develop rest api
 
 public class UserController {
@@ -26,6 +23,11 @@ public class UserController {
 	@Autowired
 	UserRepository userRepository;
 
+	
+		
+	
+	
+	
 	@PostMapping("Users/save")
 	public void save(@RequestBody User user) {
 		userRepository.save(user);
@@ -66,6 +68,8 @@ public class UserController {
 			return userObj.get();
 		}else {
 		return null;
+		
+				
 		}
 		
 	}
