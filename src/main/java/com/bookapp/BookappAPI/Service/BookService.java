@@ -5,9 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-
 import com.bookapp.bookappapi.Validation.BookValidation;
 import com.bookapp.bookappapi.dao.BookRepository;
 import com.bookapp.bookappapi.model.Book; 
@@ -37,15 +34,20 @@ public List<Book> findAll() throws Exception{
 	return listBook;
 	
 }
-public void update(@PathVariable("id") Integer id, @RequestBody Book book) throws Exception { 
+public void update(Integer id,Book book) throws Exception { 
 	try {
-		book.setId(id);
-		bookRepository.save(book);
+		book.setBookId(id);
 		BookValidation.validatebook(book);
+		bookRepository.save(book);
+	
 	}catch (Exception e) {
 		throw new Exception(e.getMessage());
 	}
 }
+///public void delete (@PathVariable("id") Integer id )throws Exception{
+//try {
+	//BookValidation.validatebook(book);
+//}
 
 
 }

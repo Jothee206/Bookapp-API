@@ -9,7 +9,7 @@ public class BookValidation {
 	
 	public static void validatebook(Book book) throws Exception{
 		
-		if(book.getBook_id()==null) {
+		if(book.getBookId()==null) {
 			throw new Exception ("invalid bookId");
 		}
 		

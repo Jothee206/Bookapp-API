@@ -18,12 +18,13 @@ import lombok.ToString;
 	
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) //AutoIncrement
-	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY) //AutoIncrement.
+	
+	@Column (name="id")
 	private Integer id;
 	
 	@Column(name="book_id")
-	private Integer book_id;
+	private Integer bookId;
 	
 	@Column(name="category")
 	private String category;
@@ -35,7 +36,7 @@ import lombok.ToString;
 	private String authorname;
 	
 	@Column(name="published_year")
-	private Integer published_year;
+	private Integer publishedYear;
 	
 	@Column(name="price")
 	private Integer price;
@@ -45,6 +46,9 @@ import lombok.ToString;
 	
 	@Column(name="ratings")
 	private Integer ratings;
+	
+	@Column(name="image_url")
+	private String imageUrl;
 	
 	
 	

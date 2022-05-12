@@ -11,13 +11,15 @@ import lombok.ToString;
 @Data
 @ToString
 @Entity
-@Table(name="users")
+@Table(name="user")
 public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //AutoIncrement
-	@Column(name="user_id")
-	private Integer user_id;
+	@Column(name="id")
+	private Integer id;
+	
+	
 	
 	@Column(name="name")
 	private String name;
@@ -29,7 +31,7 @@ public class User {
 	private String password;
 	
 	@Column(name="mobile_number")
-	private Long mobilenumber;
+	private Long mobileNumber;
 	
 	
 	
